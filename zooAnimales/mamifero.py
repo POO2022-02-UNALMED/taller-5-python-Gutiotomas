@@ -4,38 +4,64 @@ class Mamifero(Animal):
     
     caballos = 0
     leones = 0
-    __listado = []
+    _listado = []
+    def __init__ (self,nombre,edad,habitat,genero,pelaje,patas):
+        super().__init__(nombre,edad,habitat,genero)
+        self._pelaje=pelaje
+        self._patas=patas
+        self._listado.append(self)
     
-    def __init__(self, nombre, edad, habitat, genero, pelaje, patas):
-        super().__init__(nombre, edad, habitat, genero)
-        self.__pelaje = pelaje
-        self.__patas = patas
-        Animal.mamifero += 1
+    def getListado(self):
+        return self._listado
+    
+    def getCaballos(self):
+        return self._caballos
+    
+    def getLeones(self):
+        return self._leones
+    
+    def getPelaje(self):
+        return self._pelaje
+    
+    def getPatas(self):
+        return self._patas
+    
+    def setListado(self,listado):
+        self._listado = listado
+    
+    def setCaballos(self,caballos):
+        self._caballos = caballos
+    
+    def setLeones(self,leones):
+        self._leones = leones
+    
+    def setPelaje(self,pelaje):
+        self._pelaje = pelaje
+    
+    def setPatas(self,patas):
+        self._patas = patas
+
+    def isPelaje(self):
+        return self._pelaje
+    
+    @classmethod
+    def crearCaballo(cls,nombre,edad,genero):
+        cls.caballos+=1
+        return Mamifero(nombre,edad,"pradera",genero,True,4)
+    
+    @classmethod
+    def crearLeon(cls,nombre,edad,genero):
+        cls.leones+=1
+        return Mamifero(nombre,edad,"selva",genero,True,4)
     
     @classmethod
     def cantidadMamiferos(cls):
-        return len(cls.__listado)
-    
+        return len(cls._listado)
+
     @classmethod
-    def crearCaballo(cls, nombre, edad, genero):
-        caballo = Mamifero(nombre, edad, "pradera", genero, True, 4)
-        cls.__listado.append(caballo)
-        cls.caballos += 1
-    
+    def getListado(cls):
+        return cls._listado
+
     @classmethod
-    def crearLeon(cls, nombre, edad, genero):
-        leon = Mamifero(nombre, edad, "selva", genero, True, 4)
-        cls.__listado.append(leon)
-        cls.leones += 1        
-        
-    def setPelaje(self, pelaje):
-        self.__pelaje = pelaje
-        
-    def isPelaje(self):
-        return self.__pelaje
-    
-    def setPatas(self, patas):
-        self.__patas = patas
-        
-    def getPatas(self):
-        return self.__patas
+    def setListado(cls, lis):
+        cls._listado = lis
